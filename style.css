@@ -1,0 +1,148 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('./assets/background.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    overflow: hidden; 
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vh;
+    position: relative; 
+  }
+  
+  .slider {
+    display: flex;
+    perspective: 1000px; 
+    position: relative;
+    width: 250px; 
+    height: 400px; 
+    z-index: 1; 
+  }
+  
+  .slide {
+    width: 80%; 
+    height: 80%; 
+    margin: 10px; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 2s ease; 
+    transform-style: preserve-3d; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+  }
+  
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility:hidden ;
+  }
+
+  .back {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 0; 
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); 
+  }
+  
+  .center-image {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 2; 
+  }
+  
+  .center-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+  
+  .slide.flip {
+    transform: rotateY(180deg);
+  }
+
+  /* Hide the audio player */
+  audio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Lightning effect */
+  .lightning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @keyframes lightning-flash {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 0;
+    }
+    60% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .text {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid white; /* Cursor effect */
+    font-size: xx-large;
+    font-family:'Times New Roman', Times, serif;
+    color: whitesmoke;
+  }
+
+  /* Adjust the animation to fill the width instantly */
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
