@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3D Image Slider</title>
+  <script src="./script.js"></script>
+  <link rel="stylesheet" href="./style.css">
+<body>
+  <div class="container" onclick="startAudio()">
+    <div class="back"></div>
+    <div class="slider">
+      <div class="slide">
+        <img src="./assets/one.jpg" alt="Image 1">
+      </div>
+      <div class="slide">
+        <img src="./assets/two.jpg" alt="Image 2">
+      </div>
+      <div class="slide">
+        <img src="./assets/three.jpg" alt="Image 3">
+      </div>
+      <div class="slide">
+        <img src="./assets/four.jpg" alt="Image 4">
+      </div>
+      <div class="slide">
+        <img src="./assets/background.jpg" alt="Image 5">
+      </div>
+      <div class="slide">
+        <img src="./assets/six.jpg" alt="Image 6">
+      </div>
+      <div class="slide">
+        <img src="./assets/seven.jpg" alt="Image 7">
+      </div>
+      <div class="slide">
+        <img src="./assets/eight.jpg" alt="Image 8">
+      </div>
+      <div class="slide">
+        <img src="./assets/two.jpg" alt="Image 9">
+      </div>
+      <div class="slide">
+        <img src="./assets/three.jpg" alt="Image 10">
+      </div>
+    </div>
+    <div class="center-image">
+      <!-- Central image or content -->
+    </div>
+    <div class="lightning"></div>
+  </div>
+
+  <audio id="background-audio" autoplay loop>
+    <source src="./assets/Gaali Vaaluga - SenSongsMp3.Co.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="text" id="animated-text">
+    I wish you all the best for a prosperous future a head.
+  </div>
+
+  <script>
+    const textElement = document.getElementById('animated-text');
+    const fullText = textElement.innerHTML;
+    let currentIndex = 0;
+
+    function animateText() {
+      if (currentIndex < fullText.length) {
+        textElement.innerHTML = fullText.slice(0, currentIndex + 1);
+        currentIndex++;
+        setTimeout(animateText, 200); // Adjust the delay as needed (200ms here)
+      }
+    }
+
+    animateText(); // Start the animation
+
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const lightning = document.querySelector('.lightning');
+    let rotateAngle = 0;
+
+    function rotateSlides() {
+      slides.forEach((slide, index) => {
+        slide.style.transform = `rotateY(${rotateAngle + (index * 36)}deg) translateZ(500px)`;
+        if (rotateAngle + (index * 36) > 90 && rotateAngle + (index * 36) < 270) {
+          slide.classList.add('flip');
+        } else {
+          slide.classList.remove('flip');
+        }
+      });
+    }
+
+    function animate() {
+      rotateAngle += 0.6;
+      rotateSlides();
+      requestAnimationFrame(animate);
+    }
+
+    function startAudio() {
+      const audio = document.getElementById('background-audio');
+      audio.play();
+      document.removeEventListener('click', startAudio); 
+    }
+
+    document.addEventListener('click', startAudio); 
+
+    function triggerLightning() {
+      lightning.style.animation = 'lightning-flash 0.1s ease-in-out';
+      setTimeout(() => {
+        lightning.style.animation = 'none';
+      }, 100);
+    }
+
+    function randomLightning() {
+      const delay = Math.random() * 3000 + 1000; // Random delay between 1 and 4 seconds
+      setTimeout(() => {
+        triggerLightning();
+        randomLightning();
+      }, delay);
+    }
+
+    randomLightning(); // Start the lightning animation
+
+    animate();
+  </script>
+</body>
+</html>
